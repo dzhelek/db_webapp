@@ -1,0 +1,10 @@
+{% include "movies/base.html" %}
+
+{% if movies %}
+movies here
+{% else %}
+<p>No movies</p>
+{% endif %}
+
+<p><a href="{% url 'rdb:movies:create' %}">Add new</a></p>
+
