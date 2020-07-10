@@ -6,14 +6,14 @@ app_name = 'rdb'
 
 movies_patterns = [
     path('', movies.list, name='list'),
-    path('new/', movies.Create.as_view(), name='create'),
-    path('<int:pk>/edit/', movies.Update.as_view(), name='edit'),
+    path('new/', movies.create().as_view(), name='create'),
+    path('<int:pk>/edit/', movies.update().as_view(), name='edit'),
 ]
 
 producers_patterns = [
     path('', producers.list, name='list'),
-    path('new/', producers.Create.as_view(), name='create'),
-    path('edit/<int:pk>/', producers.Update.as_view(), name='edit'),
+    path('new/', producers.create().as_view(), name='create'),
+    path('edit/<int:pk>/', producers.update().as_view(), name='edit'),
     path('delete/<int:producer_id>/', producers.delete, name='delete'),
 ]
 
