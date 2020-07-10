@@ -29,6 +29,7 @@ class View:
             fields = self.fields
             template_name = f'{self.name}/create.html'
 
+            @staticmethod
             def get_success_url(*args, **kwargs):
                 return reverse_lazy(f'rdb:{self.name}:list')
 
@@ -40,6 +41,7 @@ class View:
             fields = self.fields
             template_name = f'{self.name}/edit.html'
 
+            @staticmethod
             def get_success_url(*args, **kwargs):
                 return reverse_lazy(f'rdb:{self.name}:list')
 
@@ -50,9 +52,11 @@ class MovieView(View):
     def __init__(self, *args):
         super().__init__(*args)
 
-    def actors(self, request, movie_id):
+    @staticmethod
+    def actors(request, movie_id):
         return render(request, f'actors/list.html',
                 {'actors': Actor.objects.filter(movie=movie_id)})
+
 
 movies = MovieView(Movie, 'movies', ['name', 'year', 'producer', 'actors']) 
 actors = View(Actor, 'actors', ['name', 'gender', 'birthdate', 'spouse'])

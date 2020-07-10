@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
-# Create your models here.
+
 class Actor(models.Model):
     name = models.CharField(max_length=50)
     gender = models.CharField(max_length=1, choices=[('F', 'Female'), ('M', 'Male')])
@@ -11,12 +11,14 @@ class Actor(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+
 class Spouse(models.Model):
     name = models.CharField(max_length=50)
     birthdate = models.DateField(default=timezone.now)
 
     def __str__(self):
         return f"{self.name}"
+
 
 class Movie(models.Model):
     name = models.CharField(max_length=50)
@@ -26,6 +28,7 @@ class Movie(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
 
 class Producer(models.Model):
     name = models.CharField(max_length=50)
