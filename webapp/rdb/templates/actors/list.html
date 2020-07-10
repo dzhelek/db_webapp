@@ -12,11 +12,10 @@
 	{% for actor in actors %}
 	<tr>
 		<td><a href="{% url 'rdb:actors:edit' actor.id %}">{{ actor.name }}</a></td>
-		<td>{{ actor.name }}</td>
 		<td>{{ actor.gender }}</td>
 		<td>{{ actor.birthdate }}</td>
 		<td>{{ actor.spouse }}</td>
-		<td class="no-border"><form method="POST" action="{% url 'rdb:producers:delete' producer.id %}">
+		<td class="no-border"><form method="POST" action="{% url 'rdb:actors:delete' actor.id %}">
 			{% csrf_token %}
 			<button>Delete</button>
 		</form></td>

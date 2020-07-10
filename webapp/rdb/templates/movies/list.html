@@ -1,7 +1,27 @@
 {% include "movies/base.html" %}
 
 {% if movies %}
-movies here
+
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Year</th>
+		<th>Producer</th>
+		<th>Actors</th>
+	</tr>
+	{% for movie in movies %}
+	<tr>
+		<td><a href="{% url 'rdb:movies:edit' movie.id %}">{{ movie.name }}</a></td>
+		<td>{{ movie.year }}</td>
+		<td>{{ movie.producer }}</td>
+		<td><a href="{% url 'rdb:movies:actors' movie.id %}">list</a></td>
+		<td class="no-border"><form method="POST" action="{% url 'rdb:movies:delete' movie.id %}">
+			{% csrf_token %}
+			<button>Delete</button>
+		</form></td>
+	</tr>
+	{% endfor %}
+
 {% else %}
 <p>No movies</p>
 {% endif %}

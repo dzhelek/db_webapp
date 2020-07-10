@@ -1,0 +1,26 @@
+{% include "spouses/base.html" %}
+
+{% if spouses %}
+
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Birthdate</th>
+	</tr>
+	{% for spouse in spouses %}
+	<tr>
+		<td><a href="{% url 'rdb:spouses:edit' spouse.id %}">{{ spouse.name }}</a></td>
+		<td>{{ spouse.birthdate }}</td>
+		<td class="no-border"><form method="POST" action="{% url 'rdb:spouses:delete' spouse.id %}">
+			{% csrf_token %}
+			<button>Delete</button>
+		</form></td>
+	</tr>
+	{% endfor %}
+
+{% else %}
+<p>No spouses</p>
+{% endif %}
+
+<p><a href="{% url 'rdb:spouses:create' %}">Add new</a></p>
+

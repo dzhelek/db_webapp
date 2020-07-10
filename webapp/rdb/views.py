@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import CreateView, UpdateView
 from django.urls import reverse_lazy
 
-from rdb.models import Movie, Producer, Actor
+from rdb.models import Actor, Movie, Producer, Spouse
 
 
 def index(request):
@@ -18,9 +18,9 @@ class View:
     def list(self, request):
         return render(request, f'{self.name}/list.html', {f'{self.name}': self.cls.objects.all()})
 
-    def delete(self, request, producer_id):
+    def delete(self, request, element_id):
         if request.method == 'POST':
-            self.cls.objects.get(id=producer_id).delete()
+            self.cls.objects.get(id=element_id).delete()
         return redirect(reverse_lazy(f'rdb:{self.name}:list'))
 
     def create(self):
@@ -45,7 +45,17 @@ class View:
 
         return Update
 
-movies = View(Movie, 'movies', ['name', 'year', 'producer', 'actors']) 
+
+class MovieView(View):
+    def __init__(self, *args):
+        super().__init__(*args)
+
+    def actors(self, request, movie_id):
+        return render(request, f'actors/list.html',
+                {'actors': Actor.objects.filter(movie=movie_id)})
+
+movies = MovieView(Movie, 'movies', ['name', 'year', 'producer', 'actors']) 
 actors = View(Actor, 'actors', ['name', 'gender', 'birthdate', 'spouse'])
+spouses = View(Spouse, 'spouses', ['name', 'birthdate'])
 producers = View(Producer, 'producers', ['name', 'address', 'networth'])
 
