@@ -10,7 +10,7 @@
 	</tr>
 	{% for producer in producers %}
 	<tr>
-		<td>{{ producer.name }}</td>
+		<td><a href="{% url 'rdb:producers:edit' producer.id %}">{{ producer.name }}</a></td>
 		<td>{{ producer.address }}</td>
 		<td>{{ producer.networth }}</td>
 		<td class="no-border"><form method="POST" action="{% url 'rdb:producers:delete' producer.id %}">
