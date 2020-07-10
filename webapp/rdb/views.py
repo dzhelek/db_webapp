@@ -29,7 +29,7 @@ class View:
             fields = self.fields
             template_name = f'{self.name}/create.html'
 
-            def get_success_url(self, **kwargs):
+            def get_success_url(*args, **kwargs):
                 return reverse_lazy(f'rdb:{self.name}:list')
 
         return Create
@@ -40,7 +40,7 @@ class View:
             fields = self.fields
             template_name = f'{self.name}/edit.html'
 
-            def get_success_url(self, **kwargs):
+            def get_success_url(*args, **kwargs):
                 return reverse_lazy(f'rdb:{self.name}:list')
 
         return Update
