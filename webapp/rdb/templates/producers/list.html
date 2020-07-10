@@ -1,0 +1,28 @@
+{% include "producers/base.html" %}
+
+{% if producers %}
+
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Address</th>
+		<th>Networth</th>
+	</tr>
+	{% for producer in producers %}
+	<tr>
+		<td>{{ producer.name }}</td>
+		<td>{{ producer.address }}</td>
+		<td>{{ producer.networth }}</td>
+		<td class="no-border"><form method="POST" action="{% url 'rdb:producers:delete' producer.id %}">
+			{% csrf_token %}
+			<button>Delete</button>
+		</form></td>
+	</tr>
+	{% endfor %}
+
+{% else %}
+<p>No producers</p>
+{% endif %}
+
+<p><a href="{% url 'rdb:producers:create' %}">Add new</a></p>
+
