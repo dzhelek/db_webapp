@@ -1,0 +1,31 @@
+{% include "actors/base.html" %}
+
+{% if actors %}
+
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Gender</th>
+		<th>Birthdate</th>
+		<th>Spouse</th>
+	</tr>
+	{% for actor in actors %}
+	<tr>
+		<td><a href="{% url 'rdb:actors:edit' actor.id %}">{{ actor.name }}</a></td>
+		<td>{{ actor.name }}</td>
+		<td>{{ actor.gender }}</td>
+		<td>{{ actor.birthdate }}</td>
+		<td>{{ actor.spouse }}</td>
+		<td class="no-border"><form method="POST" action="{% url 'rdb:producers:delete' producer.id %}">
+			{% csrf_token %}
+			<button>Delete</button>
+		</form></td>
+	</tr>
+	{% endfor %}
+
+{% else %}
+<p>No actors</p>
+{% endif %}
+
+<p><a href="{% url 'rdb:actors:create' %}">Add new</a></p>
+

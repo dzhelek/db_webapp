@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import CreateView, UpdateView
 from django.urls import reverse_lazy
 
-from rdb.models import Movie, Producer
+from rdb.models import Movie, Producer, Actor
 
 
 def index(request):
@@ -46,5 +46,6 @@ class View:
         return Update
 
 movies = View(Movie, 'movies', ['name', 'year', 'producer', 'actors']) 
+actors = View(Actor, 'actors', ['name', 'gender', 'birthdate', 'spouse'])
 producers = View(Producer, 'producers', ['name', 'address', 'networth'])
 
